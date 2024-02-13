@@ -286,23 +286,6 @@ function saveData() {
     localStorage.setItem('MiGTAKarteGeneratorData', JSON.stringify(data));
 }
 
-function loadData() {
-    const data = JSON.parse(localStorage.getItem('MiGTAKarteGeneratorData'));
-
-    if (data) {
-        document.getElementById('doctor').value = data.doctor
-            ? data.doctor
-            : '';
-        document.getElementById('nameDataSource').value = data.nameDataSource
-            ? data.nameDataSource
-            : '';
-        document.getElementById('locationDataSource').value =
-            data.locationDataSource ? data.locationDataSource : '';
-        document.getElementById('enableClipboard').checked =
-            data.enableClipboard ? data.enableClipboard : false;
-    }
-}
-
 function exportData() {
     const doctor = document.getElementById('doctor').value;
     const nameDataSource = document.getElementById('nameDataSource').value;
@@ -324,45 +307,34 @@ function exportData() {
 }
 
 // ページ読み込み時のデータ読み込み処理など
-document.addEventListener('DOMContentLoaded', function () {
-    loadData();
+$(document).ready(function () {
     nameUpdateSelectOptions();
     locationUpdateSelectOptions();
     billingUpdateSelectOptions();
     clearInput();
+});
 
-    //インポート処理
-    document
-        .getElementById('importData')
-        .addEventListener('change', function (event) {
-            const file = event.target.files[0];
-            if (!file) {
-                return;
-            }
-            event.target.value = '';
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const text = e.target.result;
-
-                // テキストをJSONとして解析
-                try {
-                    const json = JSON.parse(text);
-                    if (json) {
-                        document.getElementById('doctor').value = json.doctor;
-                        document.getElementById('nameDataSource').value =
-                            json.nameDataSource;
-                        document.getElementById('locationDataSource').value =
-                            json.locationDataSource;
-                        saveData();
-                    }
-                } catch (error) {
-                    console.error('JSONの解析に失敗しました:', error);
-                }
-            };
-
-            // ファイルの内容をテキストとして読み込む
-            reader.readAsText(file);
-        });
+// -- オートコンプリート用の関数 --
+// 医師名
+$(function () {
+    $('#doctor').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                type: 'get',
+                url: '/api/get_doctor/?name=' + request.term,
+                dataType: 'json',
+            })
+                .done(function (res) {
+                    response(res);
+                })
+                .fail(function (res) {
+                    console.error(res.responseJSON);
+                    response([]);
+                });
+        },
+        delay: 500,
+        minLength: 1,
+    });
 });
 
 function addMultipleName() {
@@ -380,6 +352,7 @@ function addMultipleName() {
     }
 }
 
+// クリップボードにコピーする関数
 function copyTextToClipboard(text) {
     navigator.clipboard
         .writeText(text)

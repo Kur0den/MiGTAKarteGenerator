@@ -4,8 +4,21 @@ router = APIRouter()
 
 
 @router.get("/hw")
-async def root():
+async def hello_world():
     return {"message": "Hello World"}
+
+
+@router.get("/get_doctor")
+async def get_doctor(name: str | None = None):
+    # ここでデータベースからデータを取得する
+
+    # 結果を返す際は表示される内容のリストを返す
+    data = [
+        "たなか",
+        "さとう",
+        "すずき",
+    ]
+    return data
 
 
 app = FastAPI()
