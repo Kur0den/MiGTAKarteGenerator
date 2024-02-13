@@ -7,5 +7,15 @@ services:
     volumes:
       - ./.config/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./front:/usr/share/nginx/html:ro
-    # depends_on:
-    #   - app
+
+
+  api:
+    build:
+      context: .
+      dockerfile: ./api-Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./back:/app
+    depends_on:
+      - web
