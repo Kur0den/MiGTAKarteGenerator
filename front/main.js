@@ -315,13 +315,30 @@ $(document).ready(function () {
 });
 
 // -- オートコンプリート用の関数 --
-// 医師名
 $(function () {
     $('#doctor').autocomplete({
         source: function (request, response) {
             $.ajax({
                 type: 'get',
                 url: '/api/get_doctor/?name=' + request.term,
+                dataType: 'json',
+            })
+                .done(function (res) {
+                    response(res);
+                })
+                .fail(function (res) {
+                    console.error(res.responseJSON);
+                    response([]);
+                });
+        },
+        delay: 500,
+        minLength: 1,
+    });
+    $('#user').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                type: 'get',
+                url: '/api/get_user/?name=' + request.term,
                 dataType: 'json',
             })
                 .done(function (res) {

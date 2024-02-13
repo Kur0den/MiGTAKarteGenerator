@@ -21,6 +21,19 @@ async def get_doctor(name: str | None = None):
     return data
 
 
+@router.get("/get_user")
+async def get_doctor(name: str | None = None):
+    # ここでデータベースからデータを取得する
+
+    # 結果を返す際は表示される内容のリストを返す
+    data = [
+        "たなか",
+        "さとう",
+        "すずき",
+    ]
+    return data
+
+
 app = FastAPI()
 
 app.include_router(router, prefix="/api")
