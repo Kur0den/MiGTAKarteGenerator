@@ -3,12 +3,12 @@ USE migtaKarte;
 
 -- テーブル作成
 
-CREATE Table doctor (
+CREATE Table doctors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(16) NOT NULL,
 );
 
-CREATE Table user (
+CREATE Table users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(16) NOT NULL,
     kana VARCHAR(32) NOT NULL,
