@@ -125,20 +125,11 @@
         >
         <br />
         <label>搬送：</label>
-        <input
-            type="checkbox"
-            id="transportA"
-            name="transport"
-            value="本病院"
-        />
-        <label for="transportA">本病院</label>
-        <input
-            type="checkbox"
-            id="transportB"
-            name="transport"
-            value="北病院"
-        />
-        <label for="transportB">北病院</label><br />
+        <select id="transportTo">
+            <option value="なし">なし</option>
+            <option value="本病院">本病院</option>
+            <option value="北病院">北病院</option>
+        </select>
         <label for="billing">請求：</label>
         <select id="billing" name="billing">
             <option value="院内治療">院内治療</option>
@@ -153,11 +144,7 @@
         <textarea id="remarks" name="remarks" cols="50"></textarea><br /><br />
 
         <label for="feedback">感想：</label>
-        <textarea
-            id="feedback"
-            name="feedback0:46 2024/02/14"
-            cols="50"
-        ></textarea
+        <textarea id="feedback" name="feedback" cols="50"></textarea
         ><br /><br />
 
         <button type="button" onclick="generateText()">文書を生成</button>
@@ -198,10 +185,5 @@
         <br />
         <input type="checkbox" id="enableClipboard" onchange="saveData()" />
         <label for="enableClipboard">クリップボードに自動コピー</label>
-        <br /><br />
-
-        <button onclick="exportData()">エクスポート</button><br />
-        <label>インポート：</label>
-        <input type="file" id="importData" accept=".json" />
     </body>
 </html>
