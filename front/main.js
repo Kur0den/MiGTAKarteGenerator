@@ -1,18 +1,3 @@
-// function nameUpdateSelectOptions() {
-//     const searchBox = document.getElementById('nameSearchBox');
-//     const resultSelect = document.getElementById('nameResultSelect');
-//     const dataSource = document.getElementById('nameDataSource');
-//     const lines = dataSource.value.split('\n');
-//     resultSelect.innerHTML = ''; // select要素をクリア
-//     lines.forEach(function (line) {
-//         if (line.includes(searchBox.value)) {
-//             const option = document.createElement('option');
-//             option.text = line.trim().split(';')[0]; // トリムしてからセミコロン前を追加
-//             resultSelect.add(option);
-//         }
-//     });
-// }
-
 function locationUpdateSelectOptions() {
     const searchBox = document.getElementById('locationSearchBox');
     const resultSelect = document.getElementById('locationResultSelect');
@@ -54,46 +39,6 @@ function billingUpdateSelectOptions() {
     }
 }
 
-function toggleShowNameDataSource() {
-    const targetDiv = document.getElementById('nameDataSourceDiv');
-    if (targetDiv.hidden == true) {
-        targetDiv.hidden = false;
-    } else {
-        targetDiv.hidden = true;
-    }
-}
-
-function toggleShowLocationDataSource() {
-    const targetDiv = document.getElementById('locationDataSourceDiv');
-    if (targetDiv.hidden == true) {
-        targetDiv.hidden = false;
-    } else {
-        targetDiv.hidden = true;
-    }
-}
-
-function toggleDisableNameSearchDescription() {
-    const checkBox = document.getElementById('disableNameSearch').checked;
-    const targetSpan = document.getElementById('disableNameSearchDescription');
-    if (checkBox == true) {
-        targetSpan.hidden = false;
-    } else {
-        targetSpan.hidden = true;
-    }
-}
-
-function toggleDisableLocationSearchDescription() {
-    const checkBox = document.getElementById('disableLocationSearch').checked;
-    const targetSpan = document.getElementById(
-        'disableLocationSearchDescription'
-    );
-    if (checkBox == true) {
-        targetSpan.hidden = false;
-    } else {
-        targetSpan.hidden = true;
-    }
-}
-
 function setDateTime() {
     const currentDate = new Date();
     const dateString = `${currentDate.getFullYear()}/${String(
@@ -106,20 +51,6 @@ function setDateTime() {
     ).padStart(2, '0')}`;
 
     document.getElementById('dateTime').value = dateString;
-}
-
-function removeMultipleName() {
-    // 右のセレクト要素を取得
-    var rightSelect = document.getElementById('multipleNameSelect');
-
-    // 右のセレクト要素で選択されているオプションを取得
-    var selectedOptions = rightSelect.selectedOptions;
-
-    // 選択されている各オプションを削除
-    for (var i = selectedOptions.length - 1; i >= 0; i--) {
-        var option = selectedOptions[i];
-        rightSelect.removeChild(option);
-    }
 }
 
 function patientNames() {
@@ -271,9 +202,6 @@ function exportData() {
 
 // ページ読み込み時のデータ読み込み処理など
 $(function () {
-    // nameUpdateSelectOptions();
-    locationUpdateSelectOptions();
-    billingUpdateSelectOptions();
     clearInput();
 
     // オートコンプリート用の関数
