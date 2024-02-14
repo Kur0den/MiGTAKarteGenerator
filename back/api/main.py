@@ -1,14 +1,15 @@
 from fastapi import FastAPI, APIRouter
 
-router = APIRouter()
+get_router = APIRouter()
+app = FastAPI()
 
 
-@router.get("/hw")
+@app.get("/hw")
 async def hello_world():
     return {"message": "Hello World"}
 
 
-@router.get("/get_doctor")
+@get_router.get("/get_doctor")
 async def get_doctor(name: str | None = None):
     # ここでデータベースからデータを取得する
 
@@ -21,7 +22,7 @@ async def get_doctor(name: str | None = None):
     return data
 
 
-@router.get("/get_user")
+@get_router.get("/get_user")
 async def get_user(name: str | None = None):
     # ここでデータベースからデータを取得する
 
@@ -34,6 +35,4 @@ async def get_user(name: str | None = None):
     return data
 
 
-app = FastAPI()
-
-app.include_router(router, prefix="/api")
+app.include_router(get_router, prefix="/api/get")
