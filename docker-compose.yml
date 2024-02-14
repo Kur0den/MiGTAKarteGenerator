@@ -23,3 +23,5 @@ services:
     image: mariadb:latest
     env_file:
       - docker.env
+    volumes:
+      - ./back/db:/var/lib/mysql
