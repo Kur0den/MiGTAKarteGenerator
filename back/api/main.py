@@ -22,7 +22,7 @@ async def get_doctor(name: str | None = None):
 
 
 @router.get("/get_user")
-async def get_doctor(name: str | None = None):
+async def get_user(name: str | None = None):
     # ここでデータベースからデータを取得する
 
     # 結果を返す際は表示される内容のリストを返す
