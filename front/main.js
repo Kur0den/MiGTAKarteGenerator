@@ -72,21 +72,6 @@ function toggleShowLocationDataSource() {
     }
 }
 
-// function toggleMultipleNameSelect() {
-//     const checkBox = document.getElementById(
-//         'multipleNameSelectEnable'
-//     ).checked;
-//     const targetButton = document.getElementById('multipleNameSelectButton');
-//     const targetResult = document.getElementById('multipleNameSelectResult');
-//     if (checkBox == true) {
-//         targetButton.style = 'visibility: visible;';
-//         targetResult.style = 'visibility: visible;';
-//     } else {
-//         targetButton.style = 'visibility: collapse;';
-//         targetResult.style = 'visibility: collapse;';
-//     }
-// }
-
 function toggleDisableNameSearchDescription() {
     const checkBox = document.getElementById('disableNameSearch').checked;
     const targetSpan = document.getElementById('disableNameSearchDescription');
@@ -254,36 +239,14 @@ function clearInput() {
     document.getElementById('symptomC').checked = false; //銃創
     document.getElementById('symptomD').checked = false; //火傷
     document.getElementById('symptomE').checked = false; //気絶
-    document.getElementById('transportA').checked = false; //本病院
-    document.getElementById('transportB').checked = false; //北病院
-    // document.getElementById('disableNameSearch').checked = false;
-    // document.getElementById('multipleNameSelectEnable').checked = false;
+    $('#transportTo').val('なし');
     document.getElementById('disableLocationSearch').checked = false;
     document.getElementById('outputText').textContent = '';
-    // document.getElementById('multipleNameSelect').innerHTML = '';
     document.getElementById('nameDataSourceDiv').hidden = true;
     document.getElementById('locationDataSourceDiv').hidden = true;
     document.getElementById('clipboardResult').innerText = '';
-    // toggleMultipleNameSelect();
-    // nameUpdateSelectOptions();
     locationUpdateSelectOptions();
     billingUpdateSelectOptions();
-}
-
-function saveData() {
-    const doctor = document.getElementById('doctor').value;
-    const nameDataSource = document.getElementById('nameDataSource').value;
-    const locationDataSource =
-        document.getElementById('locationDataSource').value;
-    const enableClipboard = document.getElementById('enableClipboard').checked;
-    const data = {
-        doctor,
-        nameDataSource,
-        locationDataSource,
-        enableClipboard,
-    };
-
-    localStorage.setItem('MiGTAKarteGeneratorData', JSON.stringify(data));
 }
 
 function exportData() {
