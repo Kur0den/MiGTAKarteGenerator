@@ -19,3 +19,13 @@
 .fade-out {
     animation: fadeOut 2.1s;
 }
+
+/* 追加ボタンを右揃えに */
+.add-btn {
+    float: right;
+}
+
+/* 編集ボタンを右揃えに */
+.edit-btn {
+    float: right;
+}

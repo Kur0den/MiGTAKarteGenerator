@@ -1,17 +1,17 @@
-function nameUpdateSelectOptions() {
-    const searchBox = document.getElementById('nameSearchBox');
-    const resultSelect = document.getElementById('nameResultSelect');
-    const dataSource = document.getElementById('nameDataSource');
-    const lines = dataSource.value.split('\n');
-    resultSelect.innerHTML = ''; // select要素をクリア
-    lines.forEach(function (line) {
-        if (line.includes(searchBox.value)) {
-            const option = document.createElement('option');
-            option.text = line.trim().split(';')[0]; // トリムしてからセミコロン前を追加
-            resultSelect.add(option);
-        }
-    });
-}
+// function nameUpdateSelectOptions() {
+//     const searchBox = document.getElementById('nameSearchBox');
+//     const resultSelect = document.getElementById('nameResultSelect');
+//     const dataSource = document.getElementById('nameDataSource');
+//     const lines = dataSource.value.split('\n');
+//     resultSelect.innerHTML = ''; // select要素をクリア
+//     lines.forEach(function (line) {
+//         if (line.includes(searchBox.value)) {
+//             const option = document.createElement('option');
+//             option.text = line.trim().split(';')[0]; // トリムしてからセミコロン前を追加
+//             resultSelect.add(option);
+//         }
+//     });
+// }
 
 function locationUpdateSelectOptions() {
     const searchBox = document.getElementById('locationSearchBox');
@@ -72,20 +72,20 @@ function toggleShowLocationDataSource() {
     }
 }
 
-function toggleMultipleNameSelect() {
-    const checkBox = document.getElementById(
-        'multipleNameSelectEnable'
-    ).checked;
-    const targetButton = document.getElementById('multipleNameSelectButton');
-    const targetResult = document.getElementById('multipleNameSelectResult');
-    if (checkBox == true) {
-        targetButton.style = 'visibility: visible;';
-        targetResult.style = 'visibility: visible;';
-    } else {
-        targetButton.style = 'visibility: collapse;';
-        targetResult.style = 'visibility: collapse;';
-    }
-}
+// function toggleMultipleNameSelect() {
+//     const checkBox = document.getElementById(
+//         'multipleNameSelectEnable'
+//     ).checked;
+//     const targetButton = document.getElementById('multipleNameSelectButton');
+//     const targetResult = document.getElementById('multipleNameSelectResult');
+//     if (checkBox == true) {
+//         targetButton.style = 'visibility: visible;';
+//         targetResult.style = 'visibility: visible;';
+//     } else {
+//         targetButton.style = 'visibility: collapse;';
+//         targetResult.style = 'visibility: collapse;';
+//     }
+// }
 
 function toggleDisableNameSearchDescription() {
     const checkBox = document.getElementById('disableNameSearch').checked;
@@ -244,7 +244,7 @@ function generateText() {
 
 function clearInput() {
     document.getElementById('dateTime').value = '';
-    document.getElementById('nameSearchBox').value = '';
+    // document.getElementById('nameSearchBox').value = '';
     document.getElementById('locationSearchBox').value = '';
     document.getElementById('billing').value = '院内治療';
     document.getElementById('remarks').value = '';
@@ -256,16 +256,16 @@ function clearInput() {
     document.getElementById('symptomE').checked = false; //気絶
     document.getElementById('transportA').checked = false; //本病院
     document.getElementById('transportB').checked = false; //北病院
-    document.getElementById('disableNameSearch').checked = false;
-    document.getElementById('multipleNameSelectEnable').checked = false;
+    // document.getElementById('disableNameSearch').checked = false;
+    // document.getElementById('multipleNameSelectEnable').checked = false;
     document.getElementById('disableLocationSearch').checked = false;
     document.getElementById('outputText').textContent = '';
-    document.getElementById('multipleNameSelect').innerHTML = '';
+    // document.getElementById('multipleNameSelect').innerHTML = '';
     document.getElementById('nameDataSourceDiv').hidden = true;
     document.getElementById('locationDataSourceDiv').hidden = true;
     document.getElementById('clipboardResult').innerText = '';
-    toggleMultipleNameSelect();
-    nameUpdateSelectOptions();
+    // toggleMultipleNameSelect();
+    // nameUpdateSelectOptions();
     locationUpdateSelectOptions();
     billingUpdateSelectOptions();
 }
@@ -307,15 +307,14 @@ function exportData() {
 }
 
 // ページ読み込み時のデータ読み込み処理など
-$(document).ready(function () {
-    nameUpdateSelectOptions();
+$(function () {
+    // nameUpdateSelectOptions();
     locationUpdateSelectOptions();
     billingUpdateSelectOptions();
     clearInput();
-});
 
-// -- オートコンプリート用の関数 --
-$(function () {
+    // オートコンプリート用の関数
+    // 医師
     $('#doctor').autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -334,6 +333,8 @@ $(function () {
         delay: 500,
         minLength: 1,
     });
+
+    // 患者
     $('#user').autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -351,6 +352,30 @@ $(function () {
         },
         delay: 500,
         minLength: 1,
+    });
+
+    // doctor
+    // リスト追加用の関数
+    $('#addDoctor').click(function () {
+        var userInput = $('#doctor').val();
+        $('#selectedDoctorList').append(new Option(userInput));
+        $('#doctor').val('');
+    });
+    // リスト削除用の関数
+    $('#removeDoctor').click(function () {
+        $('#selectedDoctorList option:selected').remove();
+    });
+
+    // user
+    // リスト追加用の関数
+    $('#addUser').click(function () {
+        var userInput = $('#user').val();
+        $('#selectedUserList').append(new Option(userInput));
+        $('#user').val('');
+    });
+    // リスト削除用の関数
+    $('#removeUser').click(function () {
+        $('#selectedUserList option:selected').remove();
     });
 });
 

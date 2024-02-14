@@ -16,13 +16,36 @@
     <body>
         <h2>カルテジェネレータ</h2>
         <hr />
-        <label>治療者:</label>
-        <input
-            type="text"
-            id="doctor"
-            placeholder="治療者..."
-            onchange="saveData()"
-        /><br />
+        <table>
+            <tr>
+                <td>
+                    <label>治療者:</label>
+                    <!-- 医師名 -->
+                    <input
+                        type="text"
+                        id="doctor"
+                        placeholder="治療者..."
+                    /><br />
+                    <button type="submit" class="add-btn" id="addDoctor">
+                        追加
+                    </button>
+                </td>
+                <td style="border-left: 1px solid black"></td>
+                <td>
+                    <!-- 編集ボタン -->
+                    <button class="edit-btn" id="addDoctorDb">DBに追加</button
+                    ><br />
+                    <button class="edit-btn" id="removeDoctor">
+                        リストから削除
+                    </button>
+                </td>
+                <td>
+                    <!-- 選択済み治療者 -->
+                    <select id="selectedDoctorList" size="4"></select>
+                </td>
+            </tr>
+        </table>
+        <br />
         <label>日時:</label>
         <input type="text" id="dateTime" placeholder="日時..." />
         <input
@@ -30,44 +53,31 @@
             value="現在時刻"
             onclick="setDateTime()"
         /><br /><br />
-        <table border="0">
+        <table>
             <tr>
                 <td>
-                    <input
-                        type="text"
-                        id="user"
-                        placeholder="名前検索..."
-                        oninput="nameUpdateSelectOptions()"
-                    /><br />
-                    <input
-                        type="checkbox"
-                        id="disableNameSearch"
-                        onchange="toggleDisableNameSearchDescription()"
-                    />
-                    <label for="disableNameSearch">直接入力</label><br />
-
-                    <input
-                        type="checkbox"
-                        id="multipleNameSelectEnable"
-                        onchange="toggleMultipleNameSelect()"
-                    />
-                    <label for="multipleNameSelectEnable">複数入力</label><br />
+                    <label>患者:</label>
+                    <!-- 患者名 -->
+                    <input type="text" id="user" placeholder="患者..." /><br />
+                    <button type="submit" class="add-btn" id="addUser">
+                        追加
+                    </button>
+                </td>
+                <td style="border-left: 1px solid black"></td>
+                <td>
+                    <!-- 編集ボタン -->
+                    <button class="edit-btn" id="addUserDb">DBに追加</button
+                    ><br />
+                    <button class="edit-btn" id="removeUser">
+                        リストから削除
+                    </button>
                 </td>
                 <td>
-                    <select id="nameResultSelect" size="4"></select>
-                </td>
-                <td id="multipleNameSelectButton" style="visibility: collapse">
-                    <button onclick="addMultipleName()">追加</button><br />
-                    <button onclick="removeMultipleName()">削除</button>
-                </td>
-                <td id="multipleNameSelectResult" style="visibility: collapse">
-                    <select id="multipleNameSelect" size="4"></select>
+                    <!-- 選択済み治療者 -->
+                    <select id="selectedUserList" size="4"></select>
                 </td>
             </tr>
         </table>
-        <span id="disableNameSearchDescription" hidden
-            >検索窓の値を直接カルテに出力する。;区切りで複数名入力可能</span
-        ><br />
 
         <table border="0">
             <tr>
